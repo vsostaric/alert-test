@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-table-medicine" author="vsostaric" dbms="h2">
+        <createTable tableName="medicine">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(25)"/>
+            <column name="name" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-medicine-seq" author="vsostaric" dbms="h2">
+        <createSequence
+                incrementBy="1"
+                sequenceName="medicine_seq_id"
+                startValue="10"/>
+    </changeSet>
+
+    <changeSet id="create-table-treatment" author="vsostaric" dbms="h2">
+        <createTable tableName="treatment">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-treatment-seq" author="vsostaric" dbms="h2">
+        <createSequence
+                incrementBy="1"
+                sequenceName="treatment_seq_id"
+                startValue="10"/>
+    </changeSet>
+
+    <changeSet id="create-table-treatment-medicine" author="vsostaric" dbms="h2">
+        <createTable tableName="treatment_medicines">
+            <column name="id_treatment" type="bigint"/>
+            <column name="id_medicine" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="id_treatment"
+                                 baseTableName="treatment_medicines"
+                                 constraintName="fk_treatment"
+                                 referencedColumnNames="id"
+                                 referencedTableName="treatment"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_medicine"
+                                 baseTableName="treatment_medicines"
+                                 constraintName="fk_medicine"
+                                 referencedColumnNames="id"
+                                 referencedTableName="medicine"/>
+
+    </changeSet>
+
+</databaseChangeLog>

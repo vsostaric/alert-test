@@ -1,0 +1,66 @@
+<p-dialog [(visible)]="displayAddNewTreatment" position="top" header="New treatment">
+  <app-newtreatment (treatmentAdded)="handleTreatmentAdded($event)"></app-newtreatment>
+</p-dialog>
+<h2>Treatments</h2>
+<p-table #dt [columns]="cols" [value]="treatments" dataKey="id"
+         sortMode="custom" rowExpandMode="single">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th style="width: 2.25em"></th>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field">
+        {{ col.header }}
+      </th>
+      <th>Medicine count</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded"
+               let-columns="columns">
+    <tr>
+      <td>
+        <a href="#" [pRowToggler]="rowData" *ngIf="rowData.medicines.length > 0">
+          <i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"></i>
+        </a>
+      </td>
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
+      <td>{{ rowData.medicines.length }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+    <tr>
+      <td [attr.colspan]="columns.length + 1"><h3>Medicines in {{ rowData.name }}</h3>
+      <td></td>
+    </tr>
+    <tr>
+      <td [attr.colspan]="columns.length + 1">
+        <div>
+          <app-medicines [searchable]="false"
+                         [selectable]="false"
+                         [saveable]="false"
+                         [medicines]="rowData.medicines"></app-medicines>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td [attr.colspan]="columns.length + 1">
+        <div>
+          <app-alerts [alerts]="rowData.alerts"></app-alerts>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td [attr.colspan]="columns.length + 1">
+        <div>
+          <button pButton type="button" label="Check for alerts"
+                  (click)="checkAlerts(rowData)"></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-card>
+  <button pButton type="button" label="Add new treatment"
+          (click)="openAddNewTreatmentDialog()"></button>
+</p-card>
+

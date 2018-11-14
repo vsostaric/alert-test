@@ -1,0 +1,24 @@
+<p-card>
+  <h3>New treatment name</h3>
+  <input type="text" placeholder="Treatment name"
+         pInputText [(ngModel)]="newTreatment.name"/>
+</p-card>
+<p-panel>
+  <app-medicines
+    (addSelectedMedicines)="addSelected($event)">
+  </app-medicines>
+
+  <h3>Medicines</h3>
+  <p-orderList [value]="newMedicines">
+    <ng-template let-medicine pTemplate="item">
+      <div class="ui-helper-clearfix">
+        <div style="font-size:14px;float:right;margin:15px 5px 0 0">
+          {{ medicine.name }}
+        </div>
+      </div>
+    </ng-template>
+  </p-orderList>
+</p-panel>
+<p-card>
+  <p-button label="Add new Treatment" (onClick)="saveNewTreatment()"></p-button>
+</p-card>

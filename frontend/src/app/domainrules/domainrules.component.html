@@ -1,0 +1,41 @@
+<h2>Select Type</h2>
+<p-listbox [options]="domainRuleTypes" [(ngModel)]="selectedType"
+           (onChange)="getNewParams()"
+           optionLabel="type"></p-listbox>
+
+<p-card>
+  <h3>Selected medicine</h3>
+  <div>{{ selectedMedicine.name }}</div>
+  <h3>Selected study</h3>
+  <div>{{ selectedStudy.title }}</div>
+</p-card>
+
+<div *ngIf="selectedType">
+  <div *ngFor="let param of domainRuleParams">
+    <h5>{{ param.key }}</h5>
+    <input type="text" placeholder="{{param.key}}"
+           pInputText [(ngModel)]="param.value"/>
+  </div>
+</div>
+
+<p-accordion>
+  <p-accordionTab header="Select medicine">
+    <app-medicines
+      selectionMode="single"
+      [saveable]="false"
+      (addSelectedMedicines)="addSelectedMedicine($event)">
+    </app-medicines>
+  </p-accordionTab>
+  <p-accordionTab header="Select study">
+    <app-studies
+      [saveable]="false"
+      [selectable]="true"
+      (addSelectedStudy)="addSelectedStudy($event)">
+    </app-studies>
+  </p-accordionTab>
+</p-accordion>
+
+<p-card>
+  <button pButton type="button" label="Save rule"
+          (click)="saveRule()"></button>
+</p-card>

@@ -1,0 +1,41 @@
+<p-dialog [(visible)]="displayAddNewMedicine" position="top" header="New study">
+  <h3>New medicine</h3>
+  <input type="text" placeholder="Name" pInputText [(ngModel)]="newMedicine.name"/>
+  <input type="text" placeholder="Code" pInputText [(ngModel)]="newMedicine.code"/>
+  <p-card>
+    <p-button label="Add" (onClick)="saveNewMedicine()"></p-button>
+  </p-card>
+</p-dialog>
+<p-panel>
+  <p-header *ngIf="searchable">
+    <input type="text" pInputText [(ngModel)]="searchName"/>
+    <p-button label="Search medicines"
+              (click)="searchMedicine()"
+              icon="fa fa-search" iconPos="left"></p-button>
+  </p-header>
+  <p-table [value]="medicines" selectionMode="{{ selectionMode }}"
+           [(selection)]="selectedMedicines">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Name</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-medicine>
+      <tr [pSelectableRow]="medicine">
+        <td>{{ medicine.id }}</td>
+        <td>{{ medicine.code }}</td>
+        <td>{{ medicine.name }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-button *ngIf="selectable" label="Add medicines"
+            (click)="addMedicines()"
+            icon="fa fa-search" iconPos="left"></p-button>
+</p-panel>
+<p-card *ngIf="saveable">
+  <button pButton type="button" label="Add medicine"
+          (click)="openAddNewMedicineDialog()"></button>
+</p-card>
+

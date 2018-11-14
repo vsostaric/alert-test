@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-table-study" author="vsostaric" dbms="h2">
+        <createSequence
+                incrementBy="1"
+                sequenceName="study_seq_id"
+                startValue="10"/>
+        <createTable tableName="study">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-domain-type" author="vsostaric" dbms="h2">
+        <createSequence
+                incrementBy="1"
+                sequenceName="domain_rule_type_seq_id"
+                startValue="10"/>
+        <createTable tableName="domain_rule_type">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="varchar(25)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create-table-domain-type-keys" author="vsostaric" dbms="h2">
+        <createSequence
+                incrementBy="1"
+                sequenceName="domain_rule_type_keys_seq_id"
+                startValue="10"/>
+        <createTable tableName="domain_rule_type_keys">
+            <column name="id" type="bigint"/>
+            <column name="id_type" type="bigint"/>
+            <column name="key" type="varchar(25)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-domain-params" author="vsostaric" dbms="h2">
+        <createSequence
+                incrementBy="1"
+                sequenceName="domain_rule_params_seq_id"
+                startValue="10"/>
+        <createTable tableName="domain_rule_params">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_domain_rule" type="bigint"/>
+            <column name="key" type="varchar(25)"/>
+            <column name="value" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create-table-domain-rule" author="vsostaric" dbms="h2">
+        <createSequence
+                incrementBy="1"
+                sequenceName="domain_rule_seq_id"
+                startValue="10"/>
+        <createTable tableName="domain_rule">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_type" type="bigint"/>
+            <column name="id_medicine" type="bigint"/>
+            <column name="id_study" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

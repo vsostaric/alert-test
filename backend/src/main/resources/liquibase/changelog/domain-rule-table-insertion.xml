@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="domain-rule-insertion-0" author="vsostaric" dbms="h2">
+        <insert
+                tableName="domain_rule_type">
+            <column name="id" valueComputed="domain_rule_type_seq_id.nextval"/>
+            <column name="type" value="effectivity_change"/>
+        </insert>
+        <insert
+                tableName="domain_rule_type_keys">
+            <column name="id" valueComputed="domain_rule_type_keys_seq_id.nextval"/>
+            <column name="id_type" valueComputed="domain_rule_type_seq_id.currval"/>
+            <column name="key" value="isDiminish"/>
+        </insert>
+        <insert
+                tableName="domain_rule_type_keys">
+            <column name="id" valueComputed="domain_rule_type_keys_seq_id.nextval"/>
+            <column name="id_type" valueComputed="domain_rule_type_seq_id.currval"/>
+            <column name="key" value="amountOfChange"/>
+        </insert>
+        <insert
+                tableName="domain_rule_type_keys">
+            <column name="id" valueComputed="domain_rule_type_keys_seq_id.nextval"/>
+            <column name="id_type" valueComputed="domain_rule_type_seq_id.currval"/>
+            <column name="key" value="medicineCausingChange"/>
+        </insert>
+        <insert
+                tableName="study">
+            <column name="id" valueComputed="study_seq_id.nextval"/>
+            <column name="title" value="ISBN: 2331 Dream within a Dream"/>
+        </insert>
+        <insert
+                tableName="domain_rule">
+            <column name="id" valueComputed="domain_rule_seq_id.nextval"/>
+            <column name="id_type" valueComputed="domain_rule_type_seq_id.currval"/>
+            <column name="id_medicine" valueComputed="medicine_seq_id.currval"/>
+            <column name="id_study" valueComputed="study_seq_id.currval"/>
+        </insert>
+        <insert
+                tableName="domain_rule_params">
+            <column name="id" valueComputed="domain_rule_params_seq_id.nextval"/>
+            <column name="id_domain_rule" valueComputed="domain_rule_seq_id.currval"/>
+            <column name="key" value="isDiminish"/>
+            <column name="value" value="true"/>
+        </insert>
+        <insert
+                tableName="domain_rule_params">
+            <column name="id" valueComputed="domain_rule_params_seq_id.nextval"/>
+            <column name="id_domain_rule" valueComputed="domain_rule_seq_id.currval"/>
+            <column name="key" value="amountOfChange"/>
+            <column name="value" value="25"/>
+        </insert>
+        <insert
+                tableName="domain_rule_params">
+            <column name="id" valueComputed="domain_rule_params_seq_id.nextval"/>
+            <column name="id_domain_rule" valueComputed="domain_rule_seq_id.currval"/>
+            <column name="key" value="medicineCausingChange"/>
+            <column name="value" value="22"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="domain-rule-insertion-1" author="vsostaric" dbms="h2">
+        <insert
+                tableName="domain_rule_type">
+            <column name="id" valueComputed="domain_rule_type_seq_id.nextval"/>
+            <column name="type" value="toxicity_possible"/>
+        </insert>
+        <insert
+                tableName="domain_rule_type_keys">
+            <column name="id" valueComputed="domain_rule_type_keys_seq_id.nextval"/>
+            <column name="id_type" valueComputed="domain_rule_type_seq_id.currval"/>
+            <column name="key" value="toxicity"/>
+        </insert>
+        <insert
+                tableName="domain_rule_type_keys">
+            <column name="id" valueComputed="domain_rule_type_keys_seq_id.nextval"/>
+            <column name="id_type" valueComputed="domain_rule_type_seq_id.currval"/>
+            <column name="key" value="medicineCausingToxicity"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

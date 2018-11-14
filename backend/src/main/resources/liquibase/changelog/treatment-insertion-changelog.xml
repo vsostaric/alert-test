@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="treatment-insertion-0" author="vsostaric" dbms="h2">
+        <insert
+                tableName="treatment">
+            <column name="id" valueComputed="treatment_seq_id.nextval"/>
+            <column name="name" value="treatment1"/>
+        </insert>
+        <insert
+                tableName="treatment">
+            <column name="id" valueComputed="treatment_seq_id.nextval"/>
+            <column name="name" value="treatment2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="treatment-medicine-insertion-0" author="vsostaric" dbms="h2">
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-3229"/>
+            <column name="name" value="Olumiant"/>
+        </insert>
+        <insert
+                tableName="treatment_medicines">
+            <column name="id_medicine" valueComputed="medicine_seq_id.currval"/>
+            <column name="id_treatment" valueComputed="treatment_seq_id.currval"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-3230"/>
+            <column name="name" value="Evista"/>
+        </insert>
+        <insert
+                tableName="treatment_medicines">
+            <column name="id_medicine" valueComputed="medicine_seq_id.currval"/>
+            <column name="id_treatment" valueComputed="treatment_seq_id.currval"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

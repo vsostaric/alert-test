@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="drug-insertion-0" author="vsostaric" dbms="h2">
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-0800"/>
+            <column name="name" value="Amyvid"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+
+            <column name="code" value="0002-1200"/>
+            <column name="name" value="Quinidine"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-1407"/>
+            <column name="name" value="Trulicity"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-1433"/>
+            <column name="name" value="TALTZ"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-1434"/>
+            <column name="name" value="AXIRON"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-1445"/>
+            <column name="name" value="Prozac"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-1975"/>
+            <column name="name" value="Strattera"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-3004"/>
+            <column name="name" value="Symbyax"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-3227"/>
+            <column name="name" value="Cymbalta"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-3228"/>
+            <column name="name" value="Zyprexa"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-3229"/>
+            <column name="name" value="Olumiant"/>
+        </insert>
+        <insert
+                tableName="medicine">
+            <column name="id" valueComputed="medicine_seq_id.nextval"/>
+            <column name="code" value="0002-3230"/>
+            <column name="name" value="Evista"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

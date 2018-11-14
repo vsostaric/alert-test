@@ -1,0 +1,110 @@
+= Treatment Alert
+
+== Architecture
+
+System used for generating alerts on Treatments by specified Domain rules.
+The domain rules are defined by type, and each type has a defined set of keys which have to be defined.
+
+Domain model
+
+:imagesdir: ./images
+image::domainmodel.png[Domain model]
+
+A treatment is a collection of medicines.
+A domain rule is defined by a medicine, study and type.
+Based on the type, a different set of params are created for a domain rule.
+
+The exposed REST API provides methods to define Domain rules by type but does not provide a way of defining new types.
+That may be developed later.
+
+=== Modules
+
+This is a Spring boot application with two modules called backend and frontend.
+The backend module exposes a REST api.
+
+When the application runs the api can be seen on:
+------
+http://localhost:8090/swagger-ui.html
+------
+Swagger is used for API ui creation.
+The frontend module holds an Angular 5 application.
+To start the application build it in the parent root.
+------
+mvn clean install
+------
+Then run the backend application.
+The frontend UI should be visible on:
+------
+http://localhost:8090
+------
+
+=== UI
+
+A frontend UI is an example of integration with the system.
+Any data source can integrate with the API.
+
+The UI can define new medicines, studies, treatments and domain rules.
+When defining domain rules it has to choose a type and then define specific parameters for that type.
+
+=== Liquibase
+
+Liquibase provides scripted changelogs which can build the database schema seen in the domain model picture.
+XML scripts doing this can be seen in backend/src/main/resources/liquibase/changelog/...
+
+Besides providing a schema creation they also insert some initial test data.
+Around 10 medicine cases, 1 study, 1 treatment and 1 domain rule.
+The specific treatment created can generate an alert.
+
+The H2 database can be accessed:
+------
+http://localhost:8090/h2
+------
+
+username: sa
+password:
+
+== Testing
+
+=== Integration Tests
+The application has a number of integration tests written in backend/src/test/java.
+All these tests use Spring boot and Liquibase to generate an Application Context and a InMemory Database to test functionalities.
+
+=== Test Case in UI
+
+The following test check most of the functionalities of the application.
+It persists new Medicines, Studies and Domain models.
+After that it creates a Treatment and generates Alerts based on the defined Domain models.
+
+1. Create new medicine, give it a code and a name.
+2. Create another medicine, give it a code and a name.
+Remember it's id.
+3. Create new study, give it a title.
+4. Create new Domain Rule.
+Select the new medicine and the new study for it's input parameter.
+Select it's type as effectivity change.
+Add parameters.
+Add the id from step 2 to it medicineCausingChange parameter, true to isDiminish and any number to amountOfChange.
+5. Create new Domain Rule.
+Select the new medicine and the new study for it's input parameter.
+Select it's type as toxicity possibility.
+Add parameters.
+Add the id from step 2 to it medicineCausingToxicity parameter and any number to toxicity.
+Use medicine on which rule from step 4 is implemented as a parameter in rule from step 5.
+6. Create new Treatment and add the medicines from step 1 and 2 to it.
+Click check Alerts.
+
+== Future Improvements
+
+- Validation on input. Includes validation on medicine, treatment and study insert, as well as domaint rule insert.
+- Database improvement, foreign keys on tables.
+- model expansion, self referencing foreign key on Domain rule Table - chaining Domain rule functionality
+- generic Domain rule type, possibly one taking a lambda expression as a parameter.
+- improve UI experience, it's cluttered and incomprehensible
+- Edit and Delete functionalities on Treatments, Medicines, Studies and Domain rules
+- Add some sort of security
+
+== Bugs
+
+- table rows on medicine/study codebooks are selectable even when input parameter on
+component is set to false. The input parameter only skips button creation.
+- domain rule types dissapear when saving new domain rule
