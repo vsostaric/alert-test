@@ -39,7 +39,7 @@ router.post('/saveMedicine', function (req, res, next) {
 
 router.post('/searchMedicines', function (req, res, next) {
 
-    let searchName = req.body;
+    let searchName = req.body.searchName;
     medicines = searchMedicines(searchName);
     res.send(medicines);
 
