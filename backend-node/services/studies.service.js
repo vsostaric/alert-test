@@ -12,17 +12,19 @@ function saveStudy(study) {
 }
 
 function searchStudies(searchTitle) {
-    const conn = getConnection();
-    conn.collection('studies').find().toArray().then(result => {
-        console.log(result);
-        return result;
-    }).catch(err => {
-        console.log(`Error : ${err}`);
+    return new Promise(function (resolve, reject) {
+        const conn = getConnection();
+        conn.collection('studies').find().toArray().then(result => {
+            console.log(`Studies found: ${result.length}`);
+            resolve(result);
+        }).catch(err => {
+            console.log(`Error : ${err}`);
+            reject();
+        });
     });
-
 }
 
 module.exports = {
     saveStudy: saveStudy,
     searchStudies: searchStudies
-}
+};

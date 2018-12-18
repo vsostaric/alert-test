@@ -14,8 +14,9 @@ router.post('/saveStudy', function (req, res, next) {
 router.post('/searchStudies', function (req, res, next) {
 
     let searchTitle = req.body.searchTitle;
-    studies = studiesService.searchStudies(searchTitle);
-    res.send(studies);
+    studiesService.searchStudies(searchTitle).then((studies) => {
+        res.send(studies);
+    });
 
 });
 
