@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var domainRulesRouter = require('./routes/domainrules');
 var medicineRouter = require('./routes/medicine');
 var studiesRouter = require('./routes/studies');
+var treatmentsRouter = require('./routes/treatments');
 
 var app = express();
 
@@ -27,6 +28,8 @@ app.use('/users', usersRouter);
 app.use('/domainrules', domainRulesRouter);
 app.use('/medicine', medicineRouter);
 app.use('/studies', studiesRouter);
+app.use('/studies', studiesRouter);
+app.use('/treatments', treatmentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
