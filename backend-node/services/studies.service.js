@@ -8,7 +8,7 @@ function saveStudy(study) {
     }).catch(err => {
         console.log(`Error : ${err}`);
     });
-    return {};
+    return [];
 }
 
 function searchStudies(searchTitle) {

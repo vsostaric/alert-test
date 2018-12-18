@@ -1,79 +1,31 @@
+const getConnection = require('../util/db.mongo').getConnection;
+
 function checkForAlerts(treatment) {
     return [];
 }
 
 function findTreatments() {
-    return [
-        {
-            "id": 10,
-            "name": "treatment1",
-            "medicines": []
-        },
-        {
-            "id": 11,
-            "name": "treatment2",
-            "medicines": [
-                {
-                    "id": 22,
-                    "code": "0002-3229",
-                    "name": "Olumiant"
-                },
-                {
-                    "id": 23,
-                    "code": "0002-3230",
-                    "name": "Evista"
-                }
-            ]
-        }
-    ];
+    return new Promise(function (resolve, reject) {
+        const conn = getConnection();
+        conn.collection('treatments').find().toArray().then(result => {
+            console.log(`Treatments found: ${result.length}`);
+            resolve(result);
+        }).catch(err => {
+            console.log(`Error : ${err}`);
+            reject();
+        });
+    });
 }
 
 function saveTreatment(treatment) {
-    return [
-        {
-            "id": 10,
-            "name": "treatment1",
-            "medicines": []
-        },
-        {
-            "id": 11,
-            "name": "treatment2",
-            "medicines": [
-                {
-                    "id": 22,
-                    "code": "0002-3229",
-                    "name": "Olumiant"
-                },
-                {
-                    "id": 23,
-                    "code": "0002-3230",
-                    "name": "Evista"
-                }
-            ]
-        },
-        {
-            "id": 13,
-            "name": "string",
-            "medicines": [
-                {
-                    "id": 21,
-                    "code": "0002-3230",
-                    "name": "Evista"
-                }
-            ]
-        },
-        {
-            "id": 14,
-            "name": "string",
-            "medicines": [
-                {
-                    "id": 21,
-                    "code": "0002-3230",
-                    "name": "Evista"
-                }
-            ]
-        }
-    ]
+    const conn = getConnection();
+    conn.collection('treatments').insertOne(study).then(result => {
+        console.log('Treatment inserted');
+        return [];
+    }).catch(err => {
+        console.log(`Error : ${err}`);
+    });
+    return [];
 }
 
 module.exports = {

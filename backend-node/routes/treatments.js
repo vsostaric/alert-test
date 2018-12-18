@@ -11,13 +11,15 @@ router.post('/checkForAlerts', function (req, res, next) {
 });
 
 router.post('/findTreatments', function (req, res, next) {
-    res.send(treamentsService.findTreatments())
+    treamentsService.findTreatments().then((treatments) => {
+        res.send(treatments);
+    });
 });
 
 router.post('/saveTreatment', function (req, res, next) {
-    treatment = req.body;
-    treatments = treamentsService.saveTreatment(treatment);
-    res.send(treatments);
+    let treatment = req.body;
+    treamentsService.saveStudy(study);
+    res.send(treatment);
 });
 
 module.exports = router;

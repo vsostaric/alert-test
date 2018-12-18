@@ -6,7 +6,7 @@ var studiesService = require('../services/studies.service')
 router.post('/saveStudy', function (req, res, next) {
 
     let study = req.body;
-    study = studiesService.saveStudy(study);
+    studiesService.saveStudy(study);
     res.send(study);
 
 });
